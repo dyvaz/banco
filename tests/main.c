@@ -84,9 +84,10 @@ gen_pins:
     ok(bank_account_transfer(bank, numbers[1], numbers[2], 100, pins[1]));
 
     ok(bank_free(bank));
-    ok(bank == NULL);
 
     ok(bank_alloc(bank));
+
+    ok(bank_init_from_file(bank, filename));
 
     ok(bank_account_balance(bank, numbers[0], &balance));
     ok(balance == 1000);
@@ -114,7 +115,6 @@ gen_pins:
     iserr(BANK_ERR_NEGATIVE_AMOUNT);
 
     ok(bank_free(bank));
-    ok(bank == NULL);
 
     nok(bank_init_from_file(NULL, filename));
     iserr(BANK_ERR_UNEXPECTED_NULL);
