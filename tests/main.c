@@ -19,6 +19,7 @@
 #define ok(expr) invariant(expr, "expected true, got false")
 #define nok(expr) ok(!expr)
 #define randchar(mod) (char)(rand() % mod)
+#define iserr(err) ok(bank_last_error() == err)
 
 int main(int argc, char **argv)
 {
@@ -95,19 +96,28 @@ gen_pins:
     ok(balance == 600);
 
     nok(bank_account_close(bank, numbers[2], pins[2]));
-    ok(bank_last_error() == BANK_ERR_BALANCE_NOT_ZERO);
+    iserr(BANK_ERR_BALANCE_NOT_ZERO);
 
     ok(bank_account_transfer(bank, numbers[2], numbers[0], 600, pins[2]));
     ok(bank_account_close(bank, numbers[2], pins[2]));
 
+    nok(bank_account_deposit(bank, numbers[2], 10));
+    iserr(BANK_ERR_ACCOUNT_CLOSED);
+
     nok(bank_account_withdraw(bank, numbers[0], 2000, pins[0]));
-    ok(bank_last_error() == BANK_ERR_INSUFFICIENT_BALANCE);
+    iserr(BANK_ERR_INSUFFICIENT_BALANCE);
 
     nok(bank_account_withdraw(bank, numbers[0], 1000, pins[1]));
-    ok(bank_last_error() == BANK_ERR_INVALID_PIN);
+    iserr(BANK_ERR_INVALID_PIN);
+
+    nok(bank_account_deposit(bank, numbers[0], -10));
+    iserr(BANK_ERR_NEGATIVE_AMOUNT);
 
     ok(bank_free(bank));
     ok(bank == NULL);
+
+    nok(bank_init_from_file(NULL, filename));
+    iserr(BANK_ERR_UNEXPECTED_NULL);
 
     return 0;
 }
