@@ -27,7 +27,7 @@ typedef struct
     char *filename;
 } bank;
 
-bank *bank_alloc();
+bank *bank_alloc(char *filename);
 bool bank_free(bank *bnk);
 bool bank_apply_log(bank *bnk, bank_audit_log_entry *log);
 bool bank_init_from_file(bank *bnk, const char *filename);
