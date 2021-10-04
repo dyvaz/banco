@@ -1,5 +1,4 @@
-#ifndef BANK_LOG_H
-#define BANK_LOG
+#pragma once
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -41,5 +40,3 @@ typedef union
 
 bool bank_audit_log_next(FILE *f, bank_audit_log_entry *log);
 bool bank_audit_log_append(bank_audit_log_entry *log, const char *filename);
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef BANK_ERR_H
-#define BANK_ERR_H
+#pragma once
 
 #define BANK_ERR_NONE 0
 #define BANK_ERR_UNEXPECTED_NULL 1
@@ -17,5 +16,5 @@
 #define BANK_ERR_BALANCE_NOT_ZERO 13
 
 unsigned char bank_last_error();
-
-#endif
+void bank_clear_error();
+void set_err_if_none(unsigned char err);

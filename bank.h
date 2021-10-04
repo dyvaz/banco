@@ -1,5 +1,4 @@
-#ifndef BANK_H
-#define BANK_H
+#pragma once
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -28,17 +27,15 @@ typedef struct
     char *filename;
 } bank;
 
-bool bank_alloc(bank *bank);
-bool bank_free(bank *bank);
-bool bank_apply_log(bank *bank, bank_audit_log_entry *log);
-bool bank_init_from_file(bank *bank, const char *filename);
+bank *bank_alloc();
+bool bank_free(bank *bnk);
+bool bank_apply_log(bank *bnk, bank_audit_log_entry *log);
+bool bank_init_from_file(bank *bnk, const char *filename);
 
-bool bank_account_open(bank *bank, char pin[4], unsigned long *number);
-bool bank_account_close(bank *bank, unsigned long number, char pin[4]);
+bool bank_account_open(bank *bnk, char pin[4], unsigned long *number);
+bool bank_account_close(bank *bnk, unsigned long number, char pin[4]);
 
-bool bank_account_deposit(bank *bank, unsigned long number, long amount);
-bool bank_account_withdraw(bank *bank, unsigned long number, long amount, char pin[4]);
-bool bank_account_transfer(bank *bank, unsigned long from, unsigned long to, long amount, char pin[4]);
-bool bank_account_balance(bank *bank, unsigned long number, long *balance);
-
-#endif
+bool bank_account_deposit(bank *bnk, unsigned long number, long amount);
+bool bank_account_withdraw(bank *bnk, unsigned long number, long amount, char pin[4]);
+bool bank_account_transfer(bank *bnk, unsigned long from, unsigned long to, long amount, char pin[4]);
+bool bank_account_balance(bank *bnk, unsigned long number, long *balance);

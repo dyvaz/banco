@@ -1,4 +1,10 @@
-test:
-	mkdir -p ./local/
-	gcc -o ./local/main.test ./tests/main.c ./*.c
-	./local/main.test
+test: test-build
+	./local/test/main
+
+test-build: test-clean
+	mkdir -p ./local/test/
+	gcc -g -o ./local/test/main ./tests/main.c ./*.c
+	#clang -o ./local/test/main ./tests/main.c ./*.c
+
+test-clean:
+	rm -rf ./local/test
