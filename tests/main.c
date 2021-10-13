@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define DEBUG 0
+#define DEBUG 1
 
 #if DEBUG
 #define _bank_print bank_print
@@ -53,7 +53,7 @@ void bank_print(bank *bnk)
 
 int main(int argc, char **argv)
 {
-    const char *filename = "bank.test.bin";
+    char *filename = "bank.test.bin";
     char pins[3][4];
     unsigned long numbers[3] = {0};
     long balance;

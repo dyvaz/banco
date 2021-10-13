@@ -1,5 +1,5 @@
 test: test-build
-	./local/test/main
+	cd ./local/test && ./main
 
 test-build: test-clean
 	mkdir -p ./local/test/

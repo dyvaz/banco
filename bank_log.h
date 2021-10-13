@@ -38,5 +38,5 @@ typedef union
     bank_audit_log_account_transfer transfer;
 } bank_audit_log_entry;
 
-bool bank_audit_log_next(FILE *f, bank_audit_log_entry *log);
 bool bank_audit_log_append(bank_audit_log_entry *log, const char *filename);
+bool bank_audit_log_next(FILE *f, bank_audit_log_entry *log);
